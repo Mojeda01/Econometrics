@@ -62,8 +62,23 @@ mean(jpm)
 sd(apple)
 sd(jpm)
 
+# Task 2
+market_portfolio <- data$GSPC
+mean(market_portfolio)
+sd(market_portfolio)
+skewness <- function(n, dataSeries){
+  n <- length(dataSeries)
+  mean_data <- mean(dataSeries)
+  sd_data <- sd(dataSeries)
+  skewness_value <- (n / ((n - 1) * (n - 2))) * sum(((dataSeries - mean_data) / sd_data) ^ 3)
+}
+print(skewness(35, market_portfolio))
 
-
-
-
-
+kurtosis_func <- function(data, n){
+  n <- length(data)
+  mean_data <- mean(data)
+  sd_data <- sd(data)
+  kurtosis_value <- ((n * (n + 1)) / ((n - 1) * (n - 2) * (n - 3))) * sum(((data - mean_data) / sd_data) ^ 4) 
+  kurtosis_value <- kurtosis_value - (3 * (n - 1)^2) / ((n - 2) * (n - 3))
+}
+print(kurtosis_func(market_portfolio, 35))
