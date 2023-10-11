@@ -131,6 +131,44 @@ alpha <- (average_portfolio_return - risk_free_rate) - portfolio_beta*(mean(retu
 alpha_percentage <- alpha*100
 alpha_percentage
 
+# task 2 - h
+treynor_ratio <- (average_portfolio_return - risk_free_rate) / portfolio_beta
+treynor_ratio
+
+
+# Task 3
+# Task 3 - a
+# When doing a simple log of the market returns, you run the risk of NaN's produced,
+# so we need a way to validate the data and then present the log return of the market
+valid_data_gspc <- data$GSPC[!is.na(data$GSPC) & data$GSPC > 0]
+log_values_gspc <- log(valid_data_gspc)
+log_return_gspc <- mean(log_values_gspc)
+
+valid_data_msft <- data$MSFT[!is.na(data$MSFT) & data$MSFT > 0]
+log_values_msft <- log(valid_data_msft)
+log_return_msft <- mean(log_values_msft)
+
+print(log_return_gspc) # log return of S&P 500
+print(log_return_msft) # log return of MSFT
+
+# Task 3 - b
+plot(log_values_gspc, log_values_msft, xlab="S&P 500 Log Returns", ylab="Microsoft Corporation Log Returns",
+     frame.plot=FALSE , lwd=2, title("Scatterplots showing the log returns of the S&P 500 (X) and Microsoft (Y)"),
+     col="lightblue")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
