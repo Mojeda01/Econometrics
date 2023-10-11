@@ -1,3 +1,5 @@
+library(moments)
+
 apple <- data$AAPL
 microsoft <- data$MSFT
 ibm <- data$IBM
@@ -62,18 +64,20 @@ mean(jpm)
 sd(apple)
 sd(jpm)
 
-# Task 2
+# Task 2 - a
 market_portfolio <- data$GSPC
 mean(market_portfolio)
 sd(market_portfolio)
-skewness <- function(n, dataSeries){
+
+# Skewness
+skewness_func <- function(n, dataSeries){
   n <- length(dataSeries)
   mean_data <- mean(dataSeries)
   sd_data <- sd(dataSeries)
   skewness_value <- (n / ((n - 1) * (n - 2))) * sum(((dataSeries - mean_data) / sd_data) ^ 3)
 }
-print(skewness(35, market_portfolio))
 
+#Excess Kurtosis
 kurtosis_func <- function(data, n){
   n <- length(data)
   mean_data <- mean(data)
@@ -82,3 +86,64 @@ kurtosis_func <- function(data, n){
   kurtosis_value <- kurtosis_value - (3 * (n - 1)^2) / ((n - 2) * (n - 3))
 }
 print(kurtosis_func(market_portfolio, 35))
+print(skewness_func(35, market_portfolio))
+
+# Task 2 - b
+normal_dist <- rnorm(market_portfolio, mean=0.09618735, sd=0.1713567)
+## Kurtosis and skewness from the normal distribution
+kurtosis_norm <- kurtosis_func(normal_dist, 35)
+kurtosis_norm
+
+skewness_norm <- skewness(normal_dist)
+skewness_norm
+
+# Task 2 - c
+cov_wsf_gspc <- cov(data$WFC, data$GSPC)
+cov_wsf_gspc
+
+# Task 2 - d
+marketsd <- sd(data$GSPC)
+
+beta_portfolio <- function(covariance, market_std) {
+  
+  # Calculate beta
+  beta <- covariance / market_std
+  
+  return(beta)
+}
+WFC_beta <- beta_portfolio(cov_wsf_gspc, marketsd)
+
+# Task 2 - e
+cov_appl_gspc <- cov(data$AAPL, data$GSPC)
+apple_beta <- beta_portfolio(cov_appl_gspc, marketsd)
+
+# Task 2 - f
+portfolio_2_apple = 0.75 * data$WFC + 0.25 * data$AAPL
+mean(portfolio_2_apple)
+
+# Task 2 - g
+average_portfolio_return <- mean(portfolio_2_apple) # Average portfolio return
+risk_free_rate <- 0.02 # Risk free rate
+portfolio_beta <- 0.75 * WFC_beta + 0.25 * apple_beta # Portfolio Beta
+return_sp500 <- data$GSPC # Return of S&P 500
+
+alpha <- (average_portfolio_return - risk_free_rate) - portfolio_beta*(mean(return_sp500) - risk_free_rate)
+alpha_percentage <- alpha*100
+alpha_percentage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
