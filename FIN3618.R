@@ -155,8 +155,14 @@ print(log_return_msft) # log return of MSFT
 plot(log_values_gspc, log_values_msft, xlab="S&P 500 Log Returns", ylab="Microsoft Corporation Log Returns",
      frame.plot=FALSE , lwd=2, title("Scatterplots showing the log returns of the S&P 500 (X) and Microsoft (Y)"),
      col="lightblue")
+# Task 3 - C - view document
 
-
+# Task 4 - D
+# For this task we are performing a linear regression where MSFT is the predictor variable and S&P 500 Index is our depedendent var
+# values.
+# Fit the linear regression model
+linear_reg_model <- lm(data$GSPC ~ data$MSFT)
+summary(linear_reg_model)
 
 
 
