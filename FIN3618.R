@@ -142,7 +142,7 @@ treynor_ratio
 # so we need a way to validate the data and then present the log return of the market
 valid_data_gspc <- data$GSPC[!is.na(data$GSPC) & data$GSPC > 0]
 log_values_gspc <- log(valid_data_gspc)
-log_return_gspc <- mean(log_values_gspc)
+log_return_gspc <- mean(log_values_gspc) # log return = log(1+R)
 
 valid_data_msft <- data$MSFT[!is.na(data$MSFT) & data$MSFT > 0]
 log_values_msft <- log(valid_data_msft)
