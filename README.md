@@ -1,3 +1,3 @@
 # Econometrics
 
-R Scripts
+R Scripts from my Finance studies
