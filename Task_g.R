@@ -1,3 +1,4 @@
+# Task 3.G
 apple <- data$AAPL
 microsoft <- data$MSFT
 ibm <- data$IBM
